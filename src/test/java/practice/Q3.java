@@ -44,7 +44,7 @@ public class Q3 {
 
     @Test
     public void createButtons(){
-        for (int i = 0; i <=100 ; i++) {
+        for (int i = 0; i <100 ; i++) {
             driver.findElement(By.xpath("//button[@onclick='addElement()']")).click();
         }
     }
@@ -52,9 +52,19 @@ public class Q3 {
     @Test
     public void deleteButtonsAndValidate(){
         int takesANnumber = (int)(Math.random()*100);
-        for (int i = 0; i <=takesANnumber ; i++) {
-            driver.findElement(By.xpath("//button[@onclick='deleteElement()']")).click();
+        System.out.println("Silinecek element adedi : "+takesANnumber);
+        int deleteOncesiElementAdedi=driver.findElements(By.xpath("//button[@onclick='deleteElement()']")).size();
+        for (int i = 0; i <takesANnumber ; i++) {
+            driver.findElement(By.xpath("(//button[@onclick='deleteElement()'])[1]")).click();
         }
+        int deleteSonrasiElementAdedi=driver.findElements(By.xpath("//button[@onclick='deleteElement()']")).size();
+        System.out.println(deleteOncesiElementAdedi-deleteSonrasiElementAdedi);
+        if ((deleteOncesiElementAdedi-deleteSonrasiElementAdedi)==takesANnumber){
+            System.out.println("Test PASSED. \n"+takesANnumber+" aded element silindi. "+deleteSonrasiElementAdedi+" aded element kaldi.");
+        }else {
+            System.out.println("Test FAILED");
+        }
+
 
 
     }
